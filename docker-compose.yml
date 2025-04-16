@@ -20,6 +20,14 @@ services:
       - "5432:5432"
     volumes:
       - pgdata:/var/lib/postgresql/data
+  frontend:
+    image: vedjadhav/social_media-frontend
+    container_name: social_media-frontend-1
+    depends_on:
+      - backend
+    ports:
+      - "3000:80"
+
 
 volumes:
   pgdata:
