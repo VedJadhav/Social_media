@@ -9,6 +9,12 @@ services:
       - database
     environment:
       DATABASE_URL: "postgresql://postgres:Saisai22@database:5432/socialmedia"  
+  frontend:
+    build: ./frontend
+    ports:
+      - "3000:80"  # Nginx serves on port 80 inside container
+    depends_on:
+      - backend
 
   database:
     image: postgres:15
@@ -20,13 +26,8 @@ services:
       - "5432:5432"
     volumes:
       - pgdata:/var/lib/postgresql/data
-  frontend:
-    image: vedjadhav/social_media-frontend
-    container_name: social_media-frontend-1
-    depends_on:
-      - backend
-    ports:
-      - "3000:80"
+  
+
 
 
 volumes:
