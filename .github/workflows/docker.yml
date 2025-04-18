@@ -30,6 +30,13 @@ jobs:
         push: true
         tags: vedjadhav/social_media-backend:latest
 
+    - name: 🚨 Check frontend folder & Dockerfile
+      run: |
+        echo "🔍 Checking if frontend/Dockerfile exists:"
+        ls -la ./frontend
+        echo "-----------------------------"
+        cat ./frontend/Dockerfile || echo "❌ Dockerfile missing or unreadable"
+
     - name: Build and push frontend image
       uses: docker/build-push-action@v5
       with:
@@ -37,9 +44,3 @@ jobs:
         file: ./frontend/Dockerfile
         push: true
         tags: vedjadhav/social_media-frontend:latest
-
-    - name: Verify Dockerfile existence
-      run: |
-        echo "Verifying frontend Dockerfile"
-        ls -l ./frontend
-        cat ./frontend/Dockerfile
