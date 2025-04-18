@@ -40,5 +40,6 @@ jobs:
 
     - name: Verify Dockerfile existence
       run: |
+        echo "Verifying frontend Dockerfile"
         ls -l ./frontend
         cat ./frontend/Dockerfile
