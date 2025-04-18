@@ -44,3 +44,8 @@ jobs:
         file: ./frontend/Dockerfile
         push: true
         tags: vedjadhav/social_media-frontend:latest
+    
+    - name: Checkout code with submodules
+      uses: actions/checkout@v3
+      with:
+        submodules: recursive
