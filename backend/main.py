@@ -3,6 +3,7 @@ from sqlalchemy.orm import Session
 import models, schemas, crud
 from database import engine, get_db
 from fastapi.middleware.cors import CORSMiddleware  # ✅ Import CORS Middleware
+from prometheus_fastapi_instrumentator import Instrumentator
 
 app = FastAPI()
 
@@ -17,6 +18,7 @@ app.add_middleware(
     allow_headers=["*"],  # Allow all headers
 )
 
+Instrumentator().instrument(app).expose(app)
 
 
 @app.get("/posts", response_model=list[schemas.Post])

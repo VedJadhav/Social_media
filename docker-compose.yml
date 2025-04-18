@@ -8,13 +8,12 @@ services:
     depends_on:
       - database
     environment:
-      DATABASE_URL: "postgresql://postgres:Saisai22@database:5432/socialmedia"  
+      DATABASE_URL: "postgresql://postgres:Saisai22@database:5432/socialmedia"
+
   frontend:
     build: ./frontend
     ports:
-      - "3000:80"  # Nginx serves on port 80 inside container
-    depends_on:
-      - backend
+      - "3000:80"
 
   database:
     image: postgres:15
@@ -26,9 +25,26 @@ services:
       - "5432:5432"
     volumes:
       - pgdata:/var/lib/postgresql/data
-  
 
+  prometheus:
+    image: prom/prometheus
+    volumes:
+      - ./monitoring/prometheus.yml:/etc/prometheus/prometheus.yml
+    ports:
+      - "9090:9090"
 
+  grafana:
+    image: grafana/grafana
+    ports:
+      - "3001:3000"
+    volumes:
+      - grafana-storage:/var/lib/grafana
+
+  node_exporter:
+    image: prom/node-exporter
+    ports:
+      - "9100:9100"
 
 volumes:
   pgdata:
+  grafana-storage:
