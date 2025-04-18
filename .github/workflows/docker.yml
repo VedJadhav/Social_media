@@ -37,6 +37,8 @@ jobs:
         file: ${{ github.workspace }}/frontend/Dockerfile
         push: true
         tags: vedjadhav/social_media-frontend:latest
+        build-args: |
+          --no-cache
     - name: Verify Dockerfile existence
       run: |
         ls -l ./frontend
